@@ -12,7 +12,7 @@ dhtmlxEvent(window,"load",function(){
 
     globalMenu = globalLayout.cells("a").attachMenu();
     globalMenu.setIconsPath( "{{ asset('/bundles/ariicore/images/menu/') }}" );
-    globalMenu.loadStruct("{{ url('xml_menu') }}");
+    globalMenu.loadStruct("{{ url('xml_menu') }}?route={{ app.request.attributes.get('_route') }}");
 
     myRibbon = globalLayout.cells("a").attachRibbon(); 
     myRibbon.setIconPath( "{{ asset('bundles/ariicore/images/ribbon/') }}" );
@@ -60,7 +60,7 @@ dhtmlxEvent(window,"load",function(){
     myGrid.init();
     
 
-    myTree.loadXML( "{{ url('xml_JOE_load_tree') }}", function() {
+    myTree.load( "{{ url('xml_JOE_load_tree') }}", function() {
         globalLayout.cells("a").progressOff();
     });
     myTree.attachEvent( "onRowDblClicked", function(id) {
@@ -107,7 +107,7 @@ function LoadClickRibbon (itemid,state) {
             globalLayout.cells("a").progressOn();
             myTree.deleteChildItems(0);
             path = 'live';            
-            myTree.loadXML( '{{ url('xml_JOE_load_tree') }}', function () {
+            myTree.load( '{{ url('xml_JOE_load_tree') }}', function () {
                 myAccordion.cells('folders').setText(path);
                 globalLayout.cells("a").progressOff();                
             });
@@ -116,7 +116,7 @@ function LoadClickRibbon (itemid,state) {
             path = 'remote/_all';
             globalLayout.cells("a").progressOn();
             myTree.deleteChildItems(0);
-            myTree.loadXML( '{{ url('xml_JOE_load_tree') }}?path='+path, function () {
+            myTree.load( '{{ url('xml_JOE_load_tree') }}?path='+path, function () {
                 myAccordion.cells('folders').setText(path);
                 globalLayout.cells("a").progressOff();                
             });
@@ -135,7 +135,7 @@ function LoadClickRibbon (itemid,state) {
                 path = 'remote/'+id.substr(7);
                 globalLayout.cells("a").progressOn();
                 myTree.deleteChildItems(0);
-                myTree.loadXML( '{{ url('xml_JOE_load_tree') }}?path='+path, function () {
+                myTree.load( '{{ url('xml_JOE_load_tree') }}?path='+path, function () {
                     myAccordion.cells('folders').setText(path);
                     globalLayout.cells("a").progressOff();                
                 });

@@ -2,6 +2,10 @@ arii_JOE_index:
     pattern:  /
     defaults: { _controller: AriiJOEBundle:Default:index }
 
+arii_JOE_readme:
+    pattern:  /
+    defaults: { _controller: AriiJOEBundle:Default:readme }
+
 json_JOE_ribbon:
     pattern:  /ribbon.json
     defaults: { _controller: AriiJOEBundle:Default:ribbon }

@@ -10,7 +10,7 @@ dhtmlxEvent(window,"load",function(){
 
     globalMenu = globalLayout.cells("a").attachMenu();
     globalMenu.setIconsPath( "{{ asset('/bundles/ariicore/images/menu/') }}" );
-    globalMenu.loadStruct("{{ url('xml_menu') }}");
+    globalMenu.loadStruct("{{ url('xml_menu') }}?route={{ app.request.attributes.get('_route') }}");
 
     myRibbon = globalLayout.cells("a").attachRibbon(); 
     myRibbon.setIconPath( "{{ asset('bundles/ariicore/images/ribbon/') }}" );
@@ -22,7 +22,7 @@ dhtmlxEvent(window,"load",function(){
     myTree.setImagePath("{{ asset('bundles/ariicore/images/tree/') }}");
     myTree.enableSmartXMLParsing(true);
     myTree.attachEvent( "onDblClick", EditJob );
-    myTree.loadXML( '{{ url('xml_GVZ_tree') }}');
+    myTree.load( '{{ url('xml_GVZ_tree') }}');
 
     globalLayout.cells("b").hideHeader();
     globalLayout.attachEvent("onContentLoaded", function(win){
@@ -38,7 +38,7 @@ function ClickRibbon(id, value) {
             globalLayout.cells("a").progressOn();
             myTree.deleteChildItems(0);
             path = 'live';            
-            myTree.loadXML( '{{ url('xml_GVZ_tree') }}', function () {
+            myTree.load( '{{ url('xml_GVZ_tree') }}', function () {
                 myAccordion.cells('folders').setText(path);
                 globalLayout.cells("a").progressOff();                
             });
@@ -47,7 +47,7 @@ function ClickRibbon(id, value) {
             path = 'remote/_all';
             globalLayout.cells("a").progressOn();
             myTree.deleteChildItems(0);
-            myTree.loadXML( '{{ url('xml_GVZ_tree') }}?path='+path, function () {
+            myTree.load( '{{ url('xml_GVZ_tree') }}?path='+path, function () {
                 myAccordion.cells('folders').setText(path);
                 globalLayout.cells("a").progressOff();                
             });
@@ -57,7 +57,7 @@ function ClickRibbon(id, value) {
                 path = 'remote/'+id.substr(7);
                 globalLayout.cells("a").progressOn();
                 myTree.deleteChildItems(0);
-                myTree.loadXML( '{{ url('xml_GVZ_tree') }}?path='+path, function () {
+                myTree.load( '{{ url('xml_GVZ_tree') }}?path='+path, function () {
                     myAccordion.cells('folders').setText(path);
                     globalLayout.cells("a").progressOff();                
                 });
