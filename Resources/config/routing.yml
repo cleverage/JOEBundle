@@ -13,6 +13,10 @@ json_JOE_ribbon:
 xml_JOE_menu:
     pattern:  /menu.xml
     defaults: { _controller: AriiJOEBundle:Default:menu }
+
+xml_JOE_list:
+    pattern:  /list.xml
+    defaults: { _controller: AriiJOEBundle:Default:list }
     
 xml_JOE_toolbar:
     pattern:  /toolbar.xml

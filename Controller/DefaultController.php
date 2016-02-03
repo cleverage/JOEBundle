@@ -27,7 +27,7 @@ class DefaultController extends Controller
         
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        return $this->render('AriiJOEBundle:Default:ribbon.json.twig',array('Schedulers' => $Dir), $response);
+        return $this->render('AriiJOEBundle:Default:ribbon.json.twig', array('Schedulers' => $Dir), $response);
     }
 
     public function menuAction()
@@ -37,47 +37,24 @@ class DefaultController extends Controller
         return $this->render('AriiJOEBundle:Default:menu.xml.twig', array(), $response);
     }
 
+    public function listAction()
+    {
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/xml');
+        return $this->render('AriiJOEBundle:Default:list.xml.twig', array(), $response);
+    }
+
     public function toolbarAction()
     {
         $response = new Response();
         $response->headers->set('Content-Type', 'text/xml');
-        return $this->render('AriiJOEBundle:Default:toolbar.xml.twig', array(), $response );
+        return $this->render('AriiJOEBundle:Default:toolbar.xml.twig', array(), $response);
     }
 
-    public function treeAction($folder='live',$filter=0) {
-        $request = Request::createFromGlobals();
-        if ($request->get('folder')!='') {
-            $folder = $request->get('folder');
-        }
-        
-        $sql = $this->container->get('arii_core.sql');                  
-        $qry = $sql->Select(array('ID','FOLDER','PATH','FILE','TYPE'))
-                .$sql->From(array('JOE_FILE'))
-                .$sql->Where(array('FOLDER'=>$folder))
-                .$sql->OrderBy(array('PATH','FILE'));
-        
-        $db = $this->container->get('arii_core.db');        
-        $data = $db->Connector('grid');
-        $res = $data->sql->query( $qry );
-        $Info = $key_files = array();
-        while ( $line = $data->sql->get_next($res) ) {
-            $file = $line['PATH'].'/'.$line['FILE'];
-            $Info[$file] = $line;
-            $key_files[$file] = $file;
-        }
-        
-        $tools = $this->container->get('arii_core.tools');
-        $tree = $tools->explodeTree($key_files, "/");
-        
+    public function treeAction() {
         $response = new Response();
         $response->headers->set('Content-Type', 'text/xml');
-        $list = '<?xml version="1.0" encoding="UTF-8"?>';
-        $list .= "<tree id='0'>\n";
-        $list .= $this->Folder2XML( $tree, '', $Info );
-        $list .= "</tree>\n";
-        $response->setContent( $list );
-        return $response;
-
+        return $this->render('AriiJOEBundle:Default:tree.xml.twig', array(), $response);
     }
     
    function Folder2XML( $leaf, $id = '', $Info ) {
