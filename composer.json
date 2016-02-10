@@ -3,9 +3,10 @@
     "description": "Job Editor Bundle",
     "type": "symfony-bundle",
     "require": {
+        "aura/payload": "^3.0",
+        "bfolliot/date": "~1.1.0",
         "ramsey/uuid": "^3.1",
-        "ramsey/uuid-doctrine": "^1.1",
-        "aura/payload": "^3.0"
+        "ramsey/uuid-doctrine": "^1.1"
     },
     "require-dev": {
         "atoum/atoum-bundle": "~1.1"

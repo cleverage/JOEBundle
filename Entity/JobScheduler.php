@@ -1,6 +1,6 @@
 <?php
 /**
- * Job Scheduler Service.
+ * Job Scheduler Entity.
  *
  * @link   https://github.com/AriiPortal/JOEBundle
  * @author Bryan Folliot <bfolliot@clever-age.com>
@@ -9,7 +9,6 @@
 namespace Arii\JOEBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -17,21 +16,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * JobScheduler
  *
  * @ORM\Table(name="ARII_JOE_JOB_SCHEDULER")
- * @UniqueEntity(fields={"id"})
  * @UniqueEntity(fields={"name"})
  * @ORM\Entity
  */
-class JobScheduler
+class JobScheduler extends AbstractEntity
 {
-    
-    /**
-     * @var \Ramsey\Uuid\Uuid
-     *
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
-    protected $id;
 
     /**
      * @var string
@@ -49,19 +38,8 @@ class JobScheduler
      */
     public function __construct($name = null)
     {
-        $this->id   = Uuid::uuid4();
         $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * Get Id
-     *
-     * @return \Ramsey\Uuid\Uuid
-     */
-    public function getId()
-    {
-        return $this->id;
+        return parent::__construct();
     }
 
     /**
@@ -73,7 +51,7 @@ class JobScheduler
     {
         return $this->name;
     }
-    
+
     /**
      * Set name
      *

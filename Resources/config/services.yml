@@ -1,13 +1,19 @@
 parameters:
 
-
 services:
-    arii_joe.job_scheduler:
-        class:          Arii\JOEBundle\Service\JobScheduler
-        factory_class:  Arii\JOEBundle\Service\Factory\JobScheduler
-        factory_method: get
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@event_dispatcher"
-            - "@validator"
-
+  arii_joe.job_scheduler:
+    class:          Arii\JOEBundle\Service\JobScheduler
+    factory_class:  Arii\JOEBundle\Service\Factory\JobScheduler
+    factory_method: get
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@event_dispatcher"
+      - "@validator"
+  arii_joe.job:
+    class:          Arii\JOEBundle\Service\Job
+    factory_class:  Arii\JOEBundle\Service\Factory\Job
+    factory_method: get
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@event_dispatcher"
+      - "@validator"
