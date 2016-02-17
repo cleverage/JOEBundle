@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * DelayOrderAfterSetback
  *
- * @ORM\Table(name="ARII_JOE_DELAY_ORDER_AFTER_SETBACK")
+ * @ORM\Table(name="JOE_DELAY_ORDER_AFTER_SETBACK")
  * @ORM\Entity
  */
 class DelayOrderAfterSetback extends AbstractEntity

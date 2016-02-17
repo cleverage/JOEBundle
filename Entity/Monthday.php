@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Monthday
  *
- * @ORM\Table(name="ARII_JOE_RUN_TIME_MONTHDAYS")
+ * @ORM\Table(name="JOE_RUN_TIME_MONTHDAYS")
  * @ORM\Entity
  */
 class Monthday extends AbstractEntity
@@ -18,7 +18,7 @@ class Monthday extends AbstractEntity
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Day")
-     * @ORM\JoinTable(name="ARII_JOE_RUN_TIME_MONTHDAYS_DAYS",
+     * @ORM\JoinTable(name="JOE_RUN_TIME_MONTHDAYS_DAYS",
      *      joinColumns={@ORM\JoinColumn(name="monthday_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="day_id", referencedColumnName="id", unique=true)}
      *      )
@@ -29,7 +29,7 @@ class Monthday extends AbstractEntity
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Weekday")
-     * @ORM\JoinTable(name="ARII_JOE_RUN_TIME_MONTHDAYS_WEEKDAY",
+     * @ORM\JoinTable(name="JOE_RUN_TIME_MONTHDAYS_WEEKDAY",
      *      joinColumns={@ORM\JoinColumn(name="monthday_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="weekday_id", referencedColumnName="id", unique=true)}
      *      )

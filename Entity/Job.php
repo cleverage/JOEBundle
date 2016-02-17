@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Job
  *
- * @ORM\Table(name="ARII_JOE_JOB", uniqueConstraints={@ORM\UniqueConstraint(name="name", columns={"job_scheduler_id", "name"})})
+ * @ORM\Table(name="JOE_JOB", uniqueConstraints={@ORM\UniqueConstraint(name="name", columns={"job_scheduler_id", "name"})})
  * @ORM\Entity
  */
 class Job extends AbstractEntity
@@ -199,7 +199,7 @@ class Job extends AbstractEntity
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Variable")
-     * @ORM\JoinTable(name="ARII_JOE_JOB_ENVIRONMENT_VARIABLES",
+     * @ORM\JoinTable(name="JOE_JOB_ENVIRONMENT_VARIABLES",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="variable_id", referencedColumnName="id", unique=true)}
      *      )
@@ -234,7 +234,7 @@ class Job extends AbstractEntity
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="StartWhenDirectoryChanged")
-     * @ORM\JoinTable(name="ARII_JOE_JOB_START_WHEN_DIRECTORY_CHANGED",
+     * @ORM\JoinTable(name="JOE_JOB_START_WHEN_DIRECTORY_CHANGED",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="start_when_directory_changed_id", referencedColumnName="id", unique=true)}
      *      )
@@ -245,7 +245,7 @@ class Job extends AbstractEntity
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="DelayAfterError")
-     * @ORM\JoinTable(name="ARII_JOE_JOB_DELAY_AFTER_ERROR",
+     * @ORM\JoinTable(name="JOE_JOB_DELAY_AFTER_ERROR",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="delay_after_error_id", referencedColumnName="id", unique=true)}
      *      )

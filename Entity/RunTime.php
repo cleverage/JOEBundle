@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * RunTime
  *
- * @ORM\Table(name="ARII_JOE_RUN_TIME")
+ * @ORM\Table(name="JOE_RUN_TIME")
  * @ORM\Entity
  */
 class RunTime extends AbstractTime
@@ -47,7 +47,7 @@ class RunTime extends AbstractTime
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Period")
-     * @ORM\JoinTable(name="ARII_JOE_RUN_TIME_PERIODS",
+     * @ORM\JoinTable(name="JOE_RUN_TIME_PERIODS",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="period_id", referencedColumnName="id", unique=true)}
      *      )
@@ -58,7 +58,7 @@ class RunTime extends AbstractTime
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="At")
-     * @ORM\JoinTable(name="ARII_JOE_RUN_TIME_ATS",
+     * @ORM\JoinTable(name="JOE_RUN_TIME_ATS",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="at_id", referencedColumnName="id", unique=true)}
      *      )
@@ -69,7 +69,7 @@ class RunTime extends AbstractTime
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Date")
-     * @ORM\JoinTable(name="ARII_JOE_RUN_TIME_DATES",
+     * @ORM\JoinTable(name="JOE_RUN_TIME_DATES",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="date_id", referencedColumnName="id", unique=true)}
      *      )
@@ -80,7 +80,7 @@ class RunTime extends AbstractTime
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Weekdays")
-     * @ORM\JoinTable(name="ARII_JOE_RUN_TIME_WEEKDAYS_COLLECTION",
+     * @ORM\JoinTable(name="JOE_RUN_TIME_WEEKDAYS_COLLECTION",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="weekdays_id", referencedColumnName="id", unique=true)}
      *      )
@@ -91,7 +91,7 @@ class RunTime extends AbstractTime
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Monthday")
-     * @ORM\JoinTable(name="ARII_JOE_RUN_TIME_MONTHDAY_COLLECTION",
+     * @ORM\JoinTable(name="JOE_RUN_TIME_MONTHDAY_COLLECTION",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="monthday_id", referencedColumnName="id", unique=true)}
      *      )

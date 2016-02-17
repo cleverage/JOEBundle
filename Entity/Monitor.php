@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Monitor
  *
- * @ORM\Table(name="ARII_JOE_MONITOR")
+ * @ORM\Table(name="JOE_MONITOR")
  * @ORM\Entity
  */
 class Monitor extends AbstractEntity

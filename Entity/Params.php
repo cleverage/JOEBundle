@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Params
  *
- * @ORM\Table(name="ARII_JOE_PARAMS")
+ * @ORM\Table(name="JOE_PARAMS")
  * @ORM\Entity
  */
 class Params extends AbstractEntity
@@ -22,7 +22,7 @@ class Params extends AbstractEntity
 
     /**
      * @ORM\ManyToMany(targetEntity="Param")
-     * @ORM\JoinTable(name="ARII_JOE_PARAMS_PARAM",
+     * @ORM\JoinTable(name="JOE_PARAMS_PARAM",
      *      joinColumns={@ORM\JoinColumn(name="params_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="param_id", referencedColumnName="id", unique=true)}
      *      )
@@ -31,7 +31,7 @@ class Params extends AbstractEntity
 
     /**
      * @ORM\ManyToMany(targetEntity="IncludeFile")
-     * @ORM\JoinTable(name="ARII_JOE_PARAMS_INCLUDES",
+     * @ORM\JoinTable(name="JOE_PARAMS_INCLUDES",
      *      joinColumns={@ORM\JoinColumn(name="params_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="include_id", referencedColumnName="id", unique=true)}
      *      )

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Variable
  *
- * @ORM\Table(name="ARII_JOE_VARIABLE")
+ * @ORM\Table(name="JOE_VARIABLE")
  * @ORM\Entity
  */
 class Variable extends AbstractNameValue

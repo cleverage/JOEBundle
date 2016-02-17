@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Period
  *
- * @ORM\Table(name="ARII_JOE_RUN_TIME_PERIOD")
+ * @ORM\Table(name="JOE_RUN_TIME_PERIOD")
  * @ORM\Entity
  */
 class Period extends AbstractTime

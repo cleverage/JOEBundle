@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * DelayAfterError
  *
- * @ORM\Table(name="ARII_JOE_DELAY_AFTER_ERROR")
+ * @ORM\Table(name="JOE_DELAY_AFTER_ERROR")
  * @ORM\Entity
  */
 class DelayAfterError extends AbstractEntity

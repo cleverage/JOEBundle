@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Script
  *
- * @ORM\Table(name="ARII_JOE_SCRIPT")
+ * @ORM\Table(name="JOE_SCRIPT")
  * @ORM\Entity
  */
 class Script extends AbstractEntity
@@ -68,7 +68,7 @@ class Script extends AbstractEntity
 
     /**
      * @ORM\ManyToMany(targetEntity="IncludeFile")
-     * @ORM\JoinTable(name="ARII_JOE_SCRIPT_INCLUDES",
+     * @ORM\JoinTable(name="JOE_SCRIPT_INCLUDES",
      *      joinColumns={@ORM\JoinColumn(name="script_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="include_id", referencedColumnName="id", unique=true)}
      *      )

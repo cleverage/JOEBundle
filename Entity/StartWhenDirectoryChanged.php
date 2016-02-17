@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * StartWhenDirectoryChanged
  *
- * @ORM\Table(name="ARII_JOE_START_WHEN_DIRECTORY_CHANGED")
+ * @ORM\Table(name="JOE_START_WHEN_DIRECTORY_CHANGED")
  * @ORM\Entity
  */
 class StartWhenDirectoryChanged extends AbstractEntity

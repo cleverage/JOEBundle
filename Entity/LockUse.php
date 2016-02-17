@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Lock Use
  *
- * @ORM\Table(name="ARII_JOE_JOB_LOCK_USE")
+ * @ORM\Table(name="JOE_JOB_LOCK_USE")
  * @ORM\Entity
  */
 class LockUse extends AbstractEntity

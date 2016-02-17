@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * At
  *
- * @ORM\Table(name="ARII_JOE_RUN_TIME_AT")
+ * @ORM\Table(name="JOE_RUN_TIME_AT")
  * @ORM\Entity
  */
 class At extends AbstractEntity

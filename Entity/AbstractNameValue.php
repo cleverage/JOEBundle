@@ -9,7 +9,6 @@
 namespace Arii\JOEBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class AbstractNameValue extends AbstractEntity

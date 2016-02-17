@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * IncludeFile
  *
- * @ORM\Table(name="ARII_JOE_INCLUDE")
+ * @ORM\Table(name="JOE_INCLUDE")
  * @ORM\Entity
  */
 class IncludeFile extends AbstractEntity

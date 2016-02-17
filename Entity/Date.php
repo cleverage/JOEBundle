@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Date
  *
- * @ORM\Table(name="ARII_JOE_RUN_TIME_DATE")
+ * @ORM\Table(name="JOE_RUN_TIME_DATE")
  * @ORM\Entity
  */
 class Date extends AbstractEntity
@@ -32,7 +32,7 @@ class Date extends AbstractEntity
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Period")
-     * @ORM\JoinTable(name="ARII_JOE_RUN_TIME_DATE_PERIODS",
+     * @ORM\JoinTable(name="JOE_RUN_TIME_DATE_PERIODS",
      *      joinColumns={@ORM\JoinColumn(name="date_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="period_id", referencedColumnName="id", unique=true)}
      *      )

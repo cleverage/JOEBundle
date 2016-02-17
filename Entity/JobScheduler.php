@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * JobScheduler
  *
- * @ORM\Table(name="ARII_JOE_JOB_SCHEDULER")
+ * @ORM\Table(name="JOE_JOB_SCHEDULER")
  * @UniqueEntity(fields={"name"})
  * @ORM\Entity
  */
