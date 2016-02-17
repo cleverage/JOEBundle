@@ -1,6 +1,6 @@
 <?php
 /**
- * AbstractNameValue
+ * SchedulerLogLogCategoriesSet Entity
  *
  * @link   https://github.com/AriiPortal/JOEBundle
  * @author Bryan Folliot <bfolliot@clever-age.com>
@@ -8,49 +8,54 @@
 
 namespace Arii\JOEBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-abstract class AbstractNameValue extends AbstractEntity
+/**
+ * SchedulerLogLogCategoriesSet
+ *
+ * @ORM\Table(name="JOE_SCHEDULER_LOG_LOG_CATEGORIES_SET")
+ * @ORM\Entity
+ */
+class SchedulerLogLogCategoriesSet extends AbstractEntity
 {
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    protected $name;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="value", type="string", length=255)
+     * @ORM\Column(name="category", type="string", length=255)
+     */
+    protected $category;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
      */
     protected $value;
 
     /**
-     * Gets the value of name.
+     * Gets the value of category.
      *
      * @return string
      */
-    public function getName()
+    public function getCategory()
     {
-        return $this->name;
+        return $this->category;
     }
 
     /**
-     * Sets the value of name.
+     * Sets the value of category.
      *
-     * @param string $name the name
+     * @param string $category the category
      *
      * @return self
      */
-    public function setName($name)
+    public function setCategory($category)
     {
-        $this->name = $name;
+        $this->category = $category;
 
         return $this;
     }
@@ -58,7 +63,7 @@ abstract class AbstractNameValue extends AbstractEntity
     /**
      * Gets the value of value.
      *
-     * @return string
+     * @return boolean
      */
     public function getValue()
     {
@@ -68,7 +73,7 @@ abstract class AbstractNameValue extends AbstractEntity
     /**
      * Sets the value of value.
      *
-     * @param string $value the value
+     * @param boolean $value the value
      *
      * @return self
      */

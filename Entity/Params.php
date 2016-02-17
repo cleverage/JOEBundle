@@ -27,7 +27,16 @@ class Params extends AbstractEntity
      *      inverseJoinColumns={@ORM\JoinColumn(name="param_id", referencedColumnName="id", unique=true)}
      *      )
      */
-    protected $params;
+    protected $paramCollection;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="CopyParams")
+     * @ORM\JoinTable(name="JOE_PARAMS_COPY_PARAMS",
+     *      joinColumns={@ORM\JoinColumn(name="params_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="copy_params_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    protected $copyParamsCollection;
 
     /**
      * @ORM\ManyToMany(targetEntity="IncludeFile")
@@ -44,44 +53,45 @@ class Params extends AbstractEntity
      */
     public function __construct()
     {
-        $this->params   = new ArrayCollection;
-        $this->includes = new ArrayCollection;
+        $this->paramCollection      = new ArrayCollection;
+        $this->includes             = new ArrayCollection;
+        $this->copyParamsCollection = new ArrayCollection;
         return parent::__construct();
     }
 
     /**
-     * Get params collection
+     * Get paramCollection
      *
      * @return ArrayCollection
      */
     public function getParams()
     {
-        return $this->environmentVariables;
+        return $this->paramCollection;
     }
 
     /**
-     * Set params collection
+     * Set paramCollection
      *
-     * @param ArrayCollection params
+     * @param ArrayCollection paramCollection
      *
      * @return self
      */
-    public function setParams(ArrayCollection $params)
+    public function setParams(ArrayCollection $paramCollection)
     {
-        $this->params = $params;
+        $this->paramCollection = $paramCollection;
         return $this;
     }
 
     /**
-     * Add param in params collection
+     * Add param in paramCollection
      *
-     * @param Param $lockUse
+     * @param Param $param
      *
      * @return self
      */
     public function addParam(Param $param)
     {
-        $this->params[] = $param;
+        $this->paramCollection[] = $param;
         return $this;
     }
 
@@ -117,7 +127,43 @@ class Params extends AbstractEntity
      */
     public function addInclude(IncludeFile $include)
     {
-        $this->includes[] = $param;
+        $this->includes[] = $include;
+        return $this;
+    }
+
+    /**
+     * Get copyParamsCollection
+     *
+     * @return ArrayCollection
+     */
+    public function getCopyParamsCollection()
+    {
+        return $this->copyParamsCollection;
+    }
+
+    /**
+     * Set copyParamsCollection
+     *
+     * @param ArrayCollection copyParamsCollection
+     *
+     * @return self
+     */
+    public function setCopyParamsCollection(ArrayCollection $copyParamsCollection)
+    {
+        $this->copyParamsCollection = $copyParamsCollection;
+        return $this;
+    }
+
+    /**
+     * Add CopyParams in copyParamsCollection
+     *
+     * @param CopyParams $include
+     *
+     * @return self
+     */
+    public function addCopyParams(CopyParams $copyParams)
+    {
+        $this->copyParamsCollection[] = $copyParams;
         return $this;
     }
 }

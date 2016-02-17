@@ -99,6 +99,36 @@ class RunTime extends AbstractTime
     protected $monthdayCollection;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Month")
+     * @ORM\JoinTable(name="JOE_RUN_TIME_MONTH",
+     *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="month_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    protected $monthCollection;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Ultimos")
+     * @ORM\JoinTable(name="JOE_RUN_TIME_ULTIMOS",
+     *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="ultimos_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    protected $ultimosCollection;
+
+    /**
+     * @var Holidays
+     *
+     * @ORM\OneToOne(targetEntity="Holidays")
+     * @ORM\JoinColumn(name="holidays_id", referencedColumnName="id")
+     */
+    protected $holidays;
+
+    /**
      * Constructor
      *
      */
@@ -109,6 +139,8 @@ class RunTime extends AbstractTime
         $this->dates              = new ArrayCollection;
         $this->weekdaysCollection = new ArrayCollection;
         $this->monthdayCollection = new ArrayCollection;
+        $this->monthCollection    = new ArrayCollection;
+        $this->ultimosCollection  = new ArrayCollection;
         return parent::__construct();
     }
 
@@ -297,7 +329,7 @@ class RunTime extends AbstractTime
      *
      * @return ArrayCollection
      */
-    public function getWeekdaysCollections()
+    public function getWeekdaysCollection()
     {
         return $this->weekdaysCollection;
     }
@@ -309,7 +341,7 @@ class RunTime extends AbstractTime
      *
      * @return self
      */
-    public function setWeekdaysCollections(ArrayCollection $weekdaysCollection)
+    public function setWeekdaysCollection(ArrayCollection $weekdaysCollection)
     {
         $this->weekdaysCollection = $weekdaysCollection;
         return $this;
@@ -333,7 +365,7 @@ class RunTime extends AbstractTime
      *
      * @return ArrayCollection
      */
-    public function getMonthdayCollections()
+    public function getMonthdayCollection()
     {
         return $this->monthdayCollection;
     }
@@ -345,22 +377,118 @@ class RunTime extends AbstractTime
      *
      * @return self
      */
-    public function setMonthdayCollections(ArrayCollection $monthdayCollection)
+    public function setMonthdayCollection(ArrayCollection $monthdayCollection)
     {
         $this->monthdayCollection = $monthdayCollection;
         return $this;
     }
 
     /**
-     * Add MonthdayCollection in collection
+     * Add Monthday in collection
      *
-     * @param MonthdayCollection $date
+     * @param MonthdayCollection $monthday
      *
      * @return self
      */
-    public function addMonthday(Weekdays $monthday)
+    public function addMonthday(Monthday $monthday)
     {
         $this->monthdayCollection[] = $monthday;
+        return $this;
+    }
+
+    /**
+     * Get MonthCollection collection
+     *
+     * @return ArrayCollection
+     */
+    public function getMonthCollection()
+    {
+        return $this->monthCollection;
+    }
+
+    /**
+     * Set MonthCollection collection
+     *
+     * @param ArrayCollection $monthCollection
+     *
+     * @return self
+     */
+    public function setMonthCollection(ArrayCollection $monthCollection)
+    {
+        $this->monthCollection = $monthCollection;
+        return $this;
+    }
+
+    /**
+     * Add Month in collection
+     *
+     * @param Month $month
+     *
+     * @return self
+     */
+    public function addMonth(Month $month)
+    {
+        $this->monthCollection[] = $month;
+        return $this;
+    }
+
+    /**
+     * Get ultimosCollection
+     *
+     * @return ArrayCollection
+     */
+    public function getUltimosCollection()
+    {
+        return $this->ultimosCollection;
+    }
+
+    /**
+     * Set ultimosCollection
+     *
+     * @param ArrayCollection $ultimosCollection
+     *
+     * @return self
+     */
+    public function setUltimosCollection(ArrayCollection $ultimosCollection)
+    {
+        $this->ultimosCollection = $ultimosCollection;
+        return $this;
+    }
+
+    /**
+     * Add Ultimos in collection
+     *
+     * @param Ultimos $ultimos
+     *
+     * @return self
+     */
+    public function addUltimos(Ultimos $ultimos)
+    {
+        $this->ultimosCollection[] = $ultimos;
+        return $this;
+    }
+
+    /**
+     * Gets the value of holidays.
+     *
+     * @return Holidays
+     */
+    public function getHolidays()
+    {
+        return $this->holidays;
+    }
+
+    /**
+     * Sets the value of holidays.
+     *
+     * @param Holidays $holidays the holidays
+     *
+     * @return self
+     */
+    public function setHolidays(Holidays $holidays)
+    {
+        $this->holidays = $holidays;
+
         return $this;
     }
 }

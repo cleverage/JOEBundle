@@ -1,6 +1,6 @@
 <?php
 /**
- * Weekdays Entity
+ * Ultimos Entity
  *
  * @link   https://github.com/AriiPortal/JOEBundle
  * @author Bryan Folliot <bfolliot@clever-age.com>
@@ -12,24 +12,24 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Weekday
+ * Variable
  *
- * @ORM\Table(name="JOE_RUN_TIME_WEEKDAYS")
+ * @ORM\Table(name="JOE_ULTIMOS")
  * @ORM\Entity
  */
-class Weekdays extends AbstractEntity
+class Ultimos extends AbstractEntity
 {
 
     /**
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Day")
-     * @ORM\JoinTable(name="JOE_RUN_TIME_WEEKDAYS_DAYS",
-     *      joinColumns={@ORM\JoinColumn(name="weekdays_id", referencedColumnName="id")},
+     * @ORM\JoinTable(name="JOE_ULTIMOS_DAY",
+     *      joinColumns={@ORM\JoinColumn(name="ultimatos_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="day_id", referencedColumnName="id", unique=true)}
      *      )
      */
-    protected $days;
+    protected $dayCollection;
 
     /**
      * Constructor
@@ -37,35 +37,35 @@ class Weekdays extends AbstractEntity
      */
     public function __construct()
     {
-        $this->days = new ArrayCollection;
+        $this->dayCollection = new ArrayCollection;
         return parent::__construct();
     }
 
     /**
-     * Get Day collection
+     * Get DayCollection
      *
      * @return ArrayCollection
      */
-    public function getDays()
+    public function getDayCollection()
     {
-        return $this->days;
+        return $this->dayCollection;
     }
 
     /**
-     * Set Day collection
+     * Set DayCollection
      *
-     * @param ArrayCollection $days
+     * @param ArrayCollection $dayCollection
      *
      * @return self
      */
-    public function setDays(ArrayCollection $days)
+    public function setDayCollection(ArrayCollection $dayCollection)
     {
-        $this->days = $days;
+        $this->dayCollection = $dayCollection;
         return $this;
     }
 
     /**
-     * Add Day in collection
+     * Add Day in DayCollection
      *
      * @param Day $day
      *
@@ -73,7 +73,7 @@ class Weekdays extends AbstractEntity
      */
     public function addDay(Day $day)
     {
-        $this->days[] = $day;
+        $this->dayCollection[] = $day;
         return $this;
     }
 }

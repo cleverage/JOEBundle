@@ -32,6 +32,13 @@ class JobScheduler extends AbstractEntity
     protected $name;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="ignore_process_classes", type="boolean")
+     */
+    protected $ignoreProcessClasses = false;
+
+    /**
      * Constructor
      *
      * @param string $name optional name.
@@ -60,6 +67,30 @@ class JobScheduler extends AbstractEntity
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Gets the value of ignoreProcessClasses.
+     *
+     * @return boolean
+     */
+    public function getIgnoreProcessClasses()
+    {
+        return $this->ignoreProcessClasses;
+    }
+
+    /**
+     * Sets the value of ignoreProcessClasses.
+     *
+     * @param boolean $ignoreProcessClasses the ignore process classes
+     *
+     * @return self
+     */
+    public function setIgnoreProcessClasses($ignoreProcessClasses)
+    {
+        $this->ignoreProcessClasses = $ignoreProcessClasses;
+
         return $this;
     }
 }

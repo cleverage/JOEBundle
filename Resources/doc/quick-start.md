@@ -19,4 +19,8 @@ $bundles[] = new Arii\JOEBundle\AriiJOEBundle();
 // ...
 ```
 
+## 3. Create databases tables
 
+```sh
+php app/console doctrine:schema:update --force
+```

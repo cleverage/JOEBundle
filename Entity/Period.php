@@ -1,4 +1,10 @@
 <?php
+/**
+ * Period Entity
+ *
+ * @link   https://github.com/AriiPortal/JOEBundle
+ * @author Bryan Folliot <bfolliot@clever-age.com>
+ */
 
 namespace Arii\JOEBundle\Entity;
 

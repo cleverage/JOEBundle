@@ -264,6 +264,25 @@ class Job extends AbstractEntity
     protected $delayOrderAfterSetBack;
 
     /**
+     * @var RunTime
+     *
+     * @ORM\OneToOne(targetEntity="RunTime")
+     * @ORM\JoinColumn(name="runtime_id", referencedColumnName="id")
+     */
+    protected $runtime;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Commands")
+     * @ORM\JoinTable(name="JOE_JOB_COMMANDS",
+     *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="commands_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    protected $commandsCollection;
+
+    /**
      * Constructor
      *
      */
@@ -275,6 +294,7 @@ class Job extends AbstractEntity
         $this->lockUse                   = new ArrayCollection;
         $this->params                    = new ArrayCollection;
         $this->startWhenDirectoryChanged = new ArrayCollection;
+        $this->commandsCollection        = new ArrayCollection;
         return parent::__construct();
     }
 
@@ -959,6 +979,93 @@ class Job extends AbstractEntity
     public function addDelayAfterError(DelayAfterError $delayAfterError)
     {
         $this->delayAfterError[] = $delayAfterError;
+        return $this;
+    }
+
+    /**
+     * Get DelayOrderAfterSetBack
+     *
+     * @return ArrayCollection
+     */
+    public function getDelayOrderAfterSetBack()
+    {
+        return $this->delayOrderAfterSetBack;
+    }
+
+    /**
+     * Set DelayOrderAfterSetBack
+     *
+     * @param ArrayCollection $delayOrderAfterSetBack the delay order after set back
+     *
+     * @return self
+     */
+    public function setDelayOrderAfterSetBack(ArrayCollection $delayOrderAfterSetBack)
+    {
+        $this->delayOrderAfterSetBack = $delayOrderAfterSetBack;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of runtime.
+     *
+     * @return RunTime
+     */
+    public function getRuntime()
+    {
+        return $this->runtime;
+    }
+
+    /**
+     * Sets the value of runtime.
+     *
+     * @param RunTime $runtime the runtime
+     *
+     * @return self
+     */
+    public function setRuntime(RunTime $runtime)
+    {
+        $this->runtime = $runtime;
+
+        return $this;
+    }
+
+
+    /**
+     * Get commandsCollection
+     *
+     * @return ArrayCollection
+     */
+    public function getCommandsCollection()
+    {
+        return $this->commandsCollection;
+    }
+
+    /**
+     * Set commandsCollection
+     *
+     * @param ArrayCollection $commandsCollection
+     *
+     * @return self
+     */
+    public function setCommandsCollection(
+        ArrayCollection $commandsCollection
+    ) {
+        $this->commandsCollection = $commandsCollection;
+        return $this;
+    }
+
+    /**
+     * Add Commands in commandsCollection
+     *
+     * @param Commands $commands
+     *
+     * @return self
+     */
+    public function addCommands(
+        Commands $commands
+    ) {
+        $this->commandsCollection[] = $commands;
         return $this;
     }
 }
