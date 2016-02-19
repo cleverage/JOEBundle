@@ -6,7 +6,8 @@
         "aura/payload": "^3.0",
         "bfolliot/date": "~1.1.0",
         "ramsey/uuid": "^3.1",
-        "ramsey/uuid-doctrine": "^1.1"
+        "ramsey/uuid-doctrine": "^1.1",
+        "symfony/event-dispatcher": "^2.7"
     },
     "require-dev": {
         "atoum/atoum-bundle": "~1.1"
@@ -19,5 +20,8 @@
             "name": "Bryan Folliot",
             "email": "bfolliot@clever-age.com"
         }
-    ]
+    ],
+    "suggest": {
+        "arii/joe-xml-connector-bundle": ""
+    }
 }

@@ -8,43 +8,21 @@
 
 namespace Arii\JOEBundle\Event;
 
-use Symfony\Component\EventDispatcher\Event;
-
-class JobScheduler extends Event
+class JobScheduler extends AbstractEvent
 {
-    const ON_CREATE = 'arii_joe.job_scheduler_event.create';
-    const ON_DELETE = 'arii_joe.job_scheduler_event.delete';
-    const ON_FETCH  = 'arii_joe.job_scheduler_event.fetch';
-    const ON_UPDATE = 'arii_joe.job_scheduler_event.update';
+    const ON_CREATE_ERROR = 'arii_joe.job_scheduler_event.create.error';
+    const ON_CREATE_POST  = 'arii_joe.job_scheduler_event.create.post';
+    const ON_CREATE_PRE   = 'arii_joe.job_scheduler_event.create.pre';
 
-    /**
-     * @var \Arii\JOEBundle\Entity\JobScheduler
-     */
-    protected $jobScheduler;
+    const ON_DELETE_POST  = 'arii_joe.job_scheduler_event.delete.post';
+    const ON_DELETE_PRE   = 'arii_joe.job_scheduler_event.delete.pre';
 
-    public function __construct($jobScheduler)
-    {
-        $this->jobScheduler = $jobScheduler;
-    }
+    const ON_FETCH_ERROR  = 'arii_joe.job_scheduler_event.fetch.error';
+    const ON_FETCH_POST   = 'arii_joe.job_scheduler_event.fetch.post';
+    const ON_FETCH_PRE    = 'arii_joe.job_scheduler_event.fetch.pre';
 
-    /**
-     * Get jobScheduler
-     *
-     * @return \Arii\JOEBundle\Entity\JobScheduler
-     */
-    public function getJobScheduler()
-    {
-        return $this->jobScheduler;
-    }
-    
-    /**
-     * Set jobScheduler
-     *
-     * @param \Arii\JOEBundle\Entity\JobScheduler jobScheduler
-     */
-    public function setJobScheduler($jobScheduler)
-    {
-        $this->jobScheduler = $jobScheduler;
-        return $this;
-    }
+    const ON_UPDATE_ERROR = 'arii_joe.job_scheduler_event.update.error';
+    const ON_UPDATE_VALID = 'arii_joe.job_scheduler_event.update.valid';
+    const ON_UPDATE_POST  = 'arii_joe.job_scheduler_event.update.post';
+    const ON_UPDATE_PRE   = 'arii_joe.job_scheduler_event.update.pre';
 }

@@ -53,7 +53,7 @@ class Job extends AbstractEntity
      *
      * @ORM\Column(name="idle_timeout", type="string")
      */
-    protected $idleTimeout;
+    protected $idleTimeout = 'PT5S';
 
     /**
      * @var array
@@ -150,7 +150,7 @@ class Job extends AbstractEntity
      *
      * @ORM\Column(type="string")
      */
-    protected $timeout;
+    protected $timeout = 'PT0S';
 
     /**
      * @var string
@@ -831,11 +831,11 @@ class Job extends AbstractEntity
     /**
      * Add environment variable in environment collection
      *
-     * @param EnvironmentVariable $lockUse
+     * @param Variable $variable
      *
      * @return self
      */
-    public function addEnvironmentVariable(EnvironmentVariable $environmentVariable)
+    public function addEnvironmentVariable(Variable $environmentVariable)
     {
         $this->environmentVariables[] = $environmentVariable;
         return $this;

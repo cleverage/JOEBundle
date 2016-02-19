@@ -8,40 +8,9 @@
 
 namespace Arii\JOEBundle\Event;
 
-use Symfony\Component\EventDispatcher\Event;
-
-class JobSchedulerCollection extends Event
+class JobSchedulerCollection extends AbstractEvent
 {
-    const ON_FETCH  = 'arii_joe.job_scheduler_collection_event.fetch';
-
-    /**
-     * @var \Arii\JOEBundle\Entity\JobScheduler
-     */
-    protected $collection;
-
-    public function __construct(array $collection)
-    {
-        $this->collection = $collection;
-    }
-
-    /**
-     * Get collection
-     *
-     * @return array
-     */
-    public function getCollection()
-    {
-        return $this->collection;
-    }
-    
-    /**
-     * Set collection
-     *
-     * @param array collection
-     */
-    public function setCollection($collection)
-    {
-        $this->collection = $collection;
-        return $this;
-    }
+    const ON_FETCH_ERROR = 'arii_joe.job_scheduler_collection_event.fetch.error';
+    const ON_FETCH_POST  = 'arii_joe.job_scheduler_collection_event.fetch.post';
+    const ON_FETCH_PRE   = 'arii_joe.job_scheduler_collection_event.fetch.pre';
 }

@@ -13,6 +13,7 @@ use Arii\JOEBundle\Event\JobScheduler as Event;
 use Arii\JOEBundle\Event\JobSchedulerCollection as CollectionEvent;
 use Aura\Payload\PayloadFactory;
 use Aura\Payload_Interface\PayloadStatus;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Ramsey\Uuid\Uuid;
@@ -40,39 +41,57 @@ class JobScheduler
     }
 
     /**
-     * @param string $name
+     * @param Arii\JOEBundle\Entity\JobScheduler $entity
      * @return Aura\Payload\Payload
      */
-    public function create($name)
+    public function create(Entity $entity)
     {
-        $payload = $this->payloadFactory->newInstance();
-        
-        try {
-            $entity = new Entity($name);
-            $errors = $this->validator->validate($entity);
+        $payload = $this->payloadFactory
+            ->newInstance()
+            ->setInput($entity);
 
-            if (count($errors) > 0) {
-                return $payload
-                    ->setStatus(PayloadStatus::NOT_VALID)
-                    ->setInput($name)
-                    ->setOutput($entity)
-                    ->setMessages($errors);
-            }
+        $this->eventDispatcher->dispatch(
+            Event::ON_CREATE_PRE,
+            new Event($payload)
+        );
 
+        // Validate.
+        $errors = $this->validator->validate($entity);
 
-            $event = new Event($entity);
-            $this->eventDispatcher->dispatch(Event::ON_CREATE, $event);
-
-            $this->entityManager->persist($entity);
-            $this->entityManager->flush();
-
-            return $payload
-                ->setStatus(PayloadStatus::CREATED)
-                ->setOutput($entity);
-
-        } catch (Exception $e) {
-            return $this->error($e, func_get_args());
+        if (count($errors) > 0) {
+            $payload->setStatus(PayloadStatus::NOT_VALID)
+                ->setOutput($entity)
+                ->setMessages($errors);
+            $this->eventDispatcher->dispatch(
+                Event::ON_CREATE_ERROR,
+                new Event($payload)
+            );
+            return $payload;
         }
+
+        // Save.
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+
+        $payload->setStatus(PayloadStatus::CREATED)
+            ->setOutput($entity);
+        $this->eventDispatcher->dispatch(
+            Event::ON_CREATE_POST,
+            new Event($payload)
+        );
+
+        return $payload;
+    }
+
+    /**
+     * Return new JobScheduler entity.
+     *
+     * @param string $name (optional) The name of the new JobScheduler entity.
+     * @return \Arii\JOEBundle\Entity\JobScheduler
+     */
+    public function getNew($name = null)
+    {
+        return new Entity($name);
     }
 
     /**
@@ -81,31 +100,41 @@ class JobScheduler
      */
     public function fetch(Uuid $id)
     {
-        $payload = $this->payloadFactory->newInstance();
+        $payload = $this->payloadFactory
+            ->newInstance()
+            ->setInput($id);
 
-        try {
+        $this->eventDispatcher->dispatch(
+            Event::ON_FETCH_PRE,
+            new Event($payload)
+        );
 
-            $entity = $this->entityManager
-                ->getRepository('AriiJOEBundle:JobScheduler')
-                ->find($id);
+        $entity = $this->entityManager
+            ->getRepository('AriiJOEBundle:JobScheduler')
+            ->find($id);
 
-            if (!$entity) {
-                return $payload
-                    ->setStatus(PayloadStatus::NOT_FOUND)
-                    ->setInput(func_get_args());
+        if (!$entity) {
+            $payload
+                ->setStatus(PayloadStatus::NOT_FOUND);
+            $this->eventDispatcher->dispatch(
+                Event::ON_FETCH_ERROR,
+                new Event($payload)
+            );
+            if ($payload->getStatus() == PayloadStatus::FOUND
+                && $payload->getOutput() instanceof Entity) {
+                return $payload;
             }
-
-
-            $event = new Event($entity);
-            $this->eventDispatcher->dispatch(Event::ON_FETCH, $event);
-
-            return $payload
-                ->setStatus(PayloadStatus::FOUND)
-                ->setOutput($entity);
-
-        } catch (Exception $e) {
-            return $this->error($e, func_get_args());
+            return $payload;
         }
+        $payload
+            ->setStatus(PayloadStatus::FOUND)
+            ->setOutput($entity);
+
+        $this->eventDispatcher->dispatch(
+            Event::ON_FETCH_POST,
+            new Event($payload)
+        );
+        return $payload;
     }
 
     /**
@@ -114,27 +143,39 @@ class JobScheduler
     public function fetchAll()
     {
         $payload = $this->payloadFactory->newInstance();
-        try {
-            $collection = $this->entityManager
-                ->getRepository('AriiJOEBundle:JobScheduler')
-                ->findAll();
 
-            $event = new CollectionEvent($collection);
-            $this->eventDispatcher->dispatch(CollectionEvent::ON_FETCH, $event);
+        $this->eventDispatcher->dispatch(
+            CollectionEvent::ON_FETCH_PRE,
+            new CollectionEvent($payload)
+        );
 
-            if (!$collection) {
-                return $payload
-                    ->setStatus(PayloadStatus::NOT_FOUND)
-                    ->setInput(func_get_args());
+        $collection = $this->entityManager
+            ->getRepository('AriiJOEBundle:JobScheduler')
+            ->findAll();
+
+        if (!$collection) {
+            $payload->setStatus(PayloadStatus::NOT_FOUND);
+            $this->eventDispatcher->dispatch(
+                CollectionEvent::ON_FETCH_ERROR,
+                new CollectionEvent($payload)
+            );
+            if ($payload->getStatus() == PayloadStatus::FOUND
+                && $payload->getOutput() instanceof ArrayCollection) {
+                return $payload;
             }
-
-
-            return $payload
-                ->setStatus(PayloadStatus::FOUND)
-                ->setOutput($collection);
-        } catch (Exception $e) {
-            return $this->error($e, func_get_args());
+            return $payload;
         }
+
+
+        $payload
+            ->setStatus(PayloadStatus::FOUND)
+            ->setOutput($collection);
+
+        $this->eventDispatcher->dispatch(
+            CollectionEvent::ON_FETCH_POST,
+            new CollectionEvent($payload)
+        );
+        return $payload;
     }
 
     /**
@@ -143,29 +184,46 @@ class JobScheduler
      */
     public function update(Entity $entity)
     {
-        $payload = $this->payloadFactory->newInstance();
-        try {
-            $errors = $this->validator->validate($entity);
-            if (count($errors) > 0) {
-                return $payload
-                    ->setStatus(PayloadStatus::NOT_VALID)
-                    ->setInput($entity)
-                    ->setOutput($entity)
-                    ->setMessages($errors);
-            }
+        $payload = $this->payloadFactory
+            ->newInstance()
+            ->setInput($entity);
 
-            $entity = $this->entityManager->merge($entity);
-            $this->entityManager->flush();
+        $this->eventDispatcher->dispatch(
+            Event::ON_UPDATE_PRE,
+            new Event($payload)
+        );
 
-            $event = new Event($entity);
-            $this->eventDispatcher->dispatch(Event::ON_UPDATE, $event);
-
-            return $payload
-                ->setStatus(PayloadStatus::UPDATED)
-                ->setOutput($entity);
-        } catch (Exception $e) {
-            return $this->error($e, func_get_args());
+        $errors = $this->validator->validate($entity);
+        if (count($errors) > 0) {
+            $payload
+                ->setStatus(PayloadStatus::NOT_VALID)
+                ->setOutput($entity)
+                ->setMessages($errors);
+            $this->eventDispatcher->dispatch(
+                Event::ON_UPDATE_ERROR,
+                new Event($payload)
+            );
+            return $payload;
+        } else {
+            $this->eventDispatcher->dispatch(
+                Event::ON_UPDATE_VALID,
+                new Event($payload)
+            );
         }
+
+        $entity = $this->entityManager->merge($entity);
+        $this->entityManager->flush();
+
+        $payload
+            ->setStatus(PayloadStatus::UPDATED)
+            ->setOutput($entity);
+
+        $this->eventDispatcher->dispatch(
+            Event::ON_UPDATE_POST,
+            new Event($payload)
+        );
+
+        return $payload;
     }
 
     /**
@@ -174,26 +232,25 @@ class JobScheduler
      */
     public function delete(Entity $entity)
     {
-        $payload = $this->payloadFactory->newInstance();
-        try {
-            $event = new Event($entity);
-            $this->eventDispatcher->dispatch(Event::ON_DELETE, $event);
-            $this->entityManager->remove($entity);
-            $this->entityManager->flush();
-            return $payload
-                ->setStatus(PayloadStatus::DELETED)
-                ->setOutput($entity);
-        } catch (Exception $e) {
-            return $this->error($e, func_get_args());
-        }
-    }
+        $payload = $this->payloadFactory
+            ->newInstance()
+            ->setInput($entity);
 
-    protected function error(Exception $e, array $args)
-    {
-        $payload = $this->payloadFactory->newInstance();
-        return $payload
-            ->setStatus(PayloadStatus::ERROR)
-            ->setInput($args)
-            ->setOutput($e);
+        $this->eventDispatcher->dispatch(
+            Event::ON_DELETE_PRE,
+            new Event($payload)
+        );
+
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
+        $payload
+            ->setStatus(PayloadStatus::DELETED);
+
+        $this->eventDispatcher->dispatch(
+            Event::ON_DELETE_POST,
+            new Event($payload)
+        );
+
+        return $payload;
     }
 }

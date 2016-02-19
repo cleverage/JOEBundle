@@ -26,7 +26,8 @@ class JobScheduler extends Units\Test
 
     public function testCreate()
     {
-        $result = $this->getService()->create('test');
+        $entity = new Entity('test');
+        $result = $this->getService()->create($entity);
         $this
             ->object($result)
                 ->isInstanceOf('Aura\\Payload\\Payload')
@@ -39,8 +40,8 @@ class JobScheduler extends Units\Test
     public function testCreateNotUnique()
     {
         $this->calling($this->getValidatorMock())->validate = array('Error');
-
-        $result = $this->getService()->create('test');
+        $entity = new Entity('test');
+        $result = $this->getService()->create($entity);
         $this
             ->object($result)
                 ->isInstanceOf('Aura\\Payload\\Payload')
@@ -103,7 +104,7 @@ class JobScheduler extends Units\Test
 
     public function testUpdate()
     {
-        $result = $this->getService()->create('test');
+        $result = $this->getService()->create(new Entity('test'));
         $result->getOutput()->setName('testUpdated');
 
         $resultUpdated = $this->getService()->update($result->getOutput());
@@ -122,7 +123,7 @@ class JobScheduler extends Units\Test
     public function testUpdateNotValid()
     {
 
-        $result = $this->getService()->create('test');
+        $result = $this->getService()->create(new Entity('test'));
         $result->getOutput()->setName('testUpdated');
 
         $this->calling($this->getValidatorMock())->validate = array('Error');
@@ -138,7 +139,7 @@ class JobScheduler extends Units\Test
 
     public function testDelete()
     {
-        $entity = $this->getService()->create('test');
+        $entity = $this->getService()->create(new Entity('test'));
         $result = $this->getService()->delete($entity->getOutput());
 
         $this
