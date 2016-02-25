@@ -23,7 +23,7 @@ class Ultimos extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Day")
+     * @ORM\ManyToMany(targetEntity="Day", cascade={"all"})
      * @ORM\JoinTable(name="JOE_ULTIMOS_DAY",
      *      joinColumns={@ORM\JoinColumn(name="ultimatos_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="day_id", referencedColumnName="id", unique=true)}

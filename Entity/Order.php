@@ -46,7 +46,7 @@ class Order extends AbstractEntity
     /**
      * @var Params
      *
-     * @ORM\OneToOne(targetEntity="Params")
+     * @ORM\OneToOne(targetEntity="Params", cascade={"all"})
      * @ORM\JoinColumn(name="params_id", referencedColumnName="id")
      */
     protected $params;
@@ -54,7 +54,7 @@ class Order extends AbstractEntity
     /**
      * @var RunTime
      *
-     * @ORM\OneToOne(targetEntity="RunTime")
+     * @ORM\OneToOne(targetEntity="RunTime", cascade={"all"})
      * @ORM\JoinColumn(name="runtime_id", referencedColumnName="id")
      */
     protected $runTime;

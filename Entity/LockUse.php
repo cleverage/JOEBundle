@@ -22,7 +22,7 @@ class LockUse extends AbstractEntity
     /**
      * @var Arii\JOEBundle\Entity\Job
      *
-     * @ORM\ManyToOne(targetEntity="Job")
+     * @ORM\ManyToOne(targetEntity="Job", cascade={"all"})
      * @ORM\JoinColumn(name="job_id", referencedColumnName="id")
      */
     protected $job;

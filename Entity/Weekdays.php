@@ -23,7 +23,7 @@ class Weekdays extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Day")
+     * @ORM\ManyToMany(targetEntity="Day", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_WEEKDAYS_DAYS",
      *      joinColumns={@ORM\JoinColumn(name="weekdays_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="day_id", referencedColumnName="id", unique=true)}

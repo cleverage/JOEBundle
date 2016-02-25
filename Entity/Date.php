@@ -31,7 +31,7 @@ class Date extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Period")
+     * @ORM\ManyToMany(targetEntity="Period", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_DATE_PERIODS",
      *      joinColumns={@ORM\JoinColumn(name="date_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="period_id", referencedColumnName="id", unique=true)}

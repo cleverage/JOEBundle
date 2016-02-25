@@ -23,7 +23,7 @@ class Monthday extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Day")
+     * @ORM\ManyToMany(targetEntity="Day", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_MONTHDAYS_DAYS",
      *      joinColumns={@ORM\JoinColumn(name="monthday_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="day_id", referencedColumnName="id", unique=true)}
@@ -34,7 +34,7 @@ class Monthday extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Weekday")
+     * @ORM\ManyToMany(targetEntity="Weekday", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_MONTHDAYS_WEEKDAY",
      *      joinColumns={@ORM\JoinColumn(name="monthday_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="weekday_id", referencedColumnName="id", unique=true)}

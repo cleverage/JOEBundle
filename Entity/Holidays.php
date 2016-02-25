@@ -23,7 +23,7 @@ class Holidays extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Weekdays")
+     * @ORM\ManyToMany(targetEntity="Weekdays", cascade={"all"})
      * @ORM\JoinTable(name="JOE_HOLIDAYS_WEEKDAYS",
      *      joinColumns={@ORM\JoinColumn(name="holidays_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="weekdays_id", referencedColumnName="id", unique=true)}
@@ -34,7 +34,7 @@ class Holidays extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Holiday")
+     * @ORM\ManyToMany(targetEntity="Holiday", cascade={"all"})
      * @ORM\JoinTable(name="JOE_HOLIDAYS_HOLIDAY",
      *      joinColumns={@ORM\JoinColumn(name="holidays_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="holiday_id", referencedColumnName="id", unique=true)}
@@ -43,7 +43,7 @@ class Holidays extends AbstractEntity
     protected $holidayCollection;
 
     /**
-     * @ORM\ManyToMany(targetEntity="IncludeFile")
+     * @ORM\ManyToMany(targetEntity="IncludeFile", cascade={"all"})
      * @ORM\JoinTable(name="JOE_HOLIDAYS_INCLUDES",
      *      joinColumns={@ORM\JoinColumn(name="holidays_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="include_id", referencedColumnName="id", unique=true)}

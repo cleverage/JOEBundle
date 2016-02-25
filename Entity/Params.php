@@ -21,7 +21,7 @@ class Params extends AbstractEntity
 {
 
     /**
-     * @ORM\ManyToMany(targetEntity="Param")
+     * @ORM\ManyToMany(targetEntity="Param", cascade={"all"})
      * @ORM\JoinTable(name="JOE_PARAMS_PARAM",
      *      joinColumns={@ORM\JoinColumn(name="params_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="param_id", referencedColumnName="id", unique=true)}
@@ -30,7 +30,7 @@ class Params extends AbstractEntity
     protected $paramCollection;
 
     /**
-     * @ORM\ManyToMany(targetEntity="CopyParams")
+     * @ORM\ManyToMany(targetEntity="CopyParams", cascade={"all"})
      * @ORM\JoinTable(name="JOE_PARAMS_COPY_PARAMS",
      *      joinColumns={@ORM\JoinColumn(name="params_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="copy_params_id", referencedColumnName="id", unique=true)}
@@ -39,7 +39,7 @@ class Params extends AbstractEntity
     protected $copyParamsCollection;
 
     /**
-     * @ORM\ManyToMany(targetEntity="IncludeFile")
+     * @ORM\ManyToMany(targetEntity="IncludeFile", cascade={"all"})
      * @ORM\JoinTable(name="JOE_PARAMS_INCLUDES",
      *      joinColumns={@ORM\JoinColumn(name="params_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="include_id", referencedColumnName="id", unique=true)}

@@ -63,7 +63,7 @@ class StartJob extends At
     /**
      * @var Params
      *
-     * @ORM\OneToOne(targetEntity="Params")
+     * @ORM\OneToOne(targetEntity="Params", cascade={"all"})
      * @ORM\JoinColumn(name="params_id", referencedColumnName="id")
      */
     protected $params;
@@ -71,7 +71,7 @@ class StartJob extends At
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Variable")
+     * @ORM\ManyToMany(targetEntity="Variable", cascade={"all"})
      * @ORM\JoinTable(name="JOE_START_JOB_VARIABLES",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="variable_id", referencedColumnName="id", unique=true)}

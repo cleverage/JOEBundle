@@ -32,7 +32,7 @@ class Month extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Period")
+     * @ORM\ManyToMany(targetEntity="Period", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_MONTH_PERIODS",
      *      joinColumns={@ORM\JoinColumn(name="month_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="period_id", referencedColumnName="id", unique=true)}
@@ -43,7 +43,7 @@ class Month extends AbstractEntity
     /**
      * @var Monthday
      *
-     * @ORM\OneToOne(targetEntity="Monthday")
+     * @ORM\OneToOne(targetEntity="Monthday", cascade={"all"})
      * @ORM\JoinColumn(name="monthday_id", referencedColumnName="id")
      */
     private $monthday;
@@ -51,7 +51,7 @@ class Month extends AbstractEntity
     /**
      * @var Ultimos
      *
-     * @ORM\OneToOne(targetEntity="Ultimos")
+     * @ORM\OneToOne(targetEntity="Ultimos", cascade={"all"})
      * @ORM\JoinColumn(name="ultimos_id", referencedColumnName="id")
      */
     private $ultimos;
@@ -59,7 +59,7 @@ class Month extends AbstractEntity
     /**
      * @var Weekdays
      *
-     * @ORM\OneToOne(targetEntity="Weekdays")
+     * @ORM\OneToOne(targetEntity="Weekdays", cascade={"all"})
      * @ORM\JoinColumn(name="weekdays_id", referencedColumnName="id")
      */
     private $weekdays;

@@ -72,7 +72,7 @@ class JobChainNode extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="OnReturnCode")
+     * @ORM\ManyToMany(targetEntity="OnReturnCode", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_CHAIN_NODE_ON_RETURN_CODES",
      *      joinColumns={@ORM\JoinColumn(name="job_chain_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="on_return_codes_id", referencedColumnName="id", unique=true)}

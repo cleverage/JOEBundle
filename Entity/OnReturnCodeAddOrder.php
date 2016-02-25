@@ -40,7 +40,7 @@ class OnReturnCodeAddOrder extends AbstractEntity
     /**
      * @var Params
      *
-     * @ORM\OneToOne(targetEntity="Params")
+     * @ORM\OneToOne(targetEntity="Params", cascade={"all"})
      * @ORM\JoinColumn(name="params_id", referencedColumnName="id")
      */
     protected $params;

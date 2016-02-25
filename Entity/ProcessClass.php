@@ -76,7 +76,7 @@ class ProcessClass extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="RemoteScheduler")
+     * @ORM\ManyToMany(targetEntity="RemoteScheduler", cascade={"all"})
      * @ORM\JoinTable(name="JOE_PROCESS_CLASS_REMOTE_SCHEDULER",
      *      joinColumns={@ORM\JoinColumn(name="process_class_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="remote_scheduler_id", referencedColumnName="id", unique=true)}

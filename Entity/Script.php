@@ -67,7 +67,7 @@ class Script extends AbstractEntity
     protected $javaClassPath;
 
     /**
-     * @ORM\ManyToMany(targetEntity="IncludeFile")
+     * @ORM\ManyToMany(targetEntity="IncludeFile", cascade={"all"})
      * @ORM\JoinTable(name="JOE_SCRIPT_INCLUDES",
      *      joinColumns={@ORM\JoinColumn(name="script_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="include_id", referencedColumnName="id", unique=true)}

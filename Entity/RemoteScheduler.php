@@ -43,4 +43,76 @@ class RemoteScheduler extends AbstractEntity
      * @ORM\Column(name="remote_scheduler", type="string", length=255)
      */
     protected $remoteScheduler;
+
+    /**
+     * Gets the value of httpHeartbeatPeriod.
+     *
+     * @return integer
+     */
+    public function getHttpHeartbeatPeriod()
+    {
+        return $this->httpHeartbeatPeriod;
+    }
+
+    /**
+     * Sets the value of httpHeartbeatPeriod.
+     *
+     * @param integer $httpHeartbeatPeriod the http heartbeat period
+     *
+     * @return self
+     */
+    public function setHttpHeartbeatPeriod($httpHeartbeatPeriod)
+    {
+        $this->httpHeartbeatPeriod = $httpHeartbeatPeriod;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of httpHeartbeatTimeout.
+     *
+     * @return integer
+     */
+    public function getHttpHeartbeatTimeout()
+    {
+        return $this->httpHeartbeatTimeout;
+    }
+
+    /**
+     * Sets the value of httpHeartbeatTimeout.
+     *
+     * @param integer $httpHeartbeatTimeout the http heartbeat timeout
+     *
+     * @return self
+     */
+    public function setHttpHeartbeatTimeout($httpHeartbeatTimeout)
+    {
+        $this->httpHeartbeatTimeout = $httpHeartbeatTimeout;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of remoteScheduler.
+     *
+     * @return string
+     */
+    public function getRemoteScheduler()
+    {
+        return $this->remoteScheduler;
+    }
+
+    /**
+     * Sets the value of remoteScheduler.
+     *
+     * @param string $remoteScheduler the remote scheduler
+     *
+     * @return self
+     */
+    public function setRemoteScheduler($remoteScheduler)
+    {
+        $this->remoteScheduler = $remoteScheduler;
+
+        return $this;
+    }
 }

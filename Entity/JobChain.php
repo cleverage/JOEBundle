@@ -100,7 +100,7 @@ class JobChain extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="FileOrderSource")
+     * @ORM\ManyToMany(targetEntity="FileOrderSource", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_CHAIN_FILE_ORDER_SOURCE",
      *      joinColumns={@ORM\JoinColumn(name="job_chain_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="file_order_source_id", referencedColumnName="id", unique=true)}
@@ -111,7 +111,7 @@ class JobChain extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="JobChainNode")
+     * @ORM\ManyToMany(targetEntity="JobChainNode", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_CHAIN_JOB_CHAIN_NODE",
      *      joinColumns={@ORM\JoinColumn(name="job_chain_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="job_chain_node_id", referencedColumnName="id", unique=true)}
@@ -122,7 +122,7 @@ class JobChain extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="FileOrderSink")
+     * @ORM\ManyToMany(targetEntity="FileOrderSink", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_CHAIN_FILE_ORDER_SINK",
      *      joinColumns={@ORM\JoinColumn(name="job_chain_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="file_order_sink_id", referencedColumnName="id", unique=true)}
@@ -133,7 +133,7 @@ class JobChain extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="JobChainNodeJobChain")
+     * @ORM\ManyToMany(targetEntity="JobChainNodeJobChain", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_CHAIN_JOB_CHAIN_NODE_JOB_CHAIN",
      *      joinColumns={@ORM\JoinColumn(name="job_chain_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="job_chain_node_job_chain_id", referencedColumnName="id", unique=true)}
@@ -144,7 +144,7 @@ class JobChain extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="JobChainNodeEnd")
+     * @ORM\ManyToMany(targetEntity="JobChainNodeEnd", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_CHAIN_JOB_CHAIN_NODE_END",
      *      joinColumns={@ORM\JoinColumn(name="job_chain_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="job_chain_node_end_id", referencedColumnName="id", unique=true)}

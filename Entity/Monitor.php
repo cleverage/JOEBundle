@@ -42,7 +42,7 @@ class Monitor extends AbstractEntity
     /**
      * @var Script
      *
-     * @ORM\OneToOne(targetEntity="Script")
+     * @ORM\OneToOne(targetEntity="Script", cascade={"all"})
      * @ORM\JoinColumn(name="script_id", referencedColumnName="id")
      */
     protected $script;

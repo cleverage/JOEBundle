@@ -36,17 +36,16 @@ class RunTime extends AbstractTime
     protected $timeZone;
 
     /**
-     * @var Schedule
+     * @var string
      *
-     * @ORM\OneToOne(targetEntity="Schedule")
-     * @ORM\JoinColumn(name="schedule_id", referencedColumnName="id")
+     * @ORM\Column(name="schedule", type="string", length=255)
      */
     protected $schedule;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Period")
+     * @ORM\ManyToMany(targetEntity="Period", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_PERIODS",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="period_id", referencedColumnName="id", unique=true)}
@@ -57,7 +56,7 @@ class RunTime extends AbstractTime
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="At")
+     * @ORM\ManyToMany(targetEntity="At", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_ATS",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="at_id", referencedColumnName="id", unique=true)}
@@ -68,7 +67,7 @@ class RunTime extends AbstractTime
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Date")
+     * @ORM\ManyToMany(targetEntity="Date", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_DATES",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="date_id", referencedColumnName="id", unique=true)}
@@ -79,7 +78,7 @@ class RunTime extends AbstractTime
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Weekdays")
+     * @ORM\ManyToMany(targetEntity="Weekdays", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_WEEKDAYS_COLLECTION",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="weekdays_id", referencedColumnName="id", unique=true)}
@@ -90,7 +89,7 @@ class RunTime extends AbstractTime
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Monthday")
+     * @ORM\ManyToMany(targetEntity="Monthday", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_MONTHDAY_COLLECTION",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="monthday_id", referencedColumnName="id", unique=true)}
@@ -101,7 +100,7 @@ class RunTime extends AbstractTime
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Month")
+     * @ORM\ManyToMany(targetEntity="Month", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_MONTH",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="month_id", referencedColumnName="id", unique=true)}
@@ -112,7 +111,7 @@ class RunTime extends AbstractTime
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Ultimos")
+     * @ORM\ManyToMany(targetEntity="Ultimos", cascade={"all"})
      * @ORM\JoinTable(name="JOE_RUN_TIME_ULTIMOS",
      *      joinColumns={@ORM\JoinColumn(name="run_time_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="ultimos_id", referencedColumnName="id", unique=true)}
@@ -123,7 +122,7 @@ class RunTime extends AbstractTime
     /**
      * @var Holidays
      *
-     * @ORM\OneToOne(targetEntity="Holidays")
+     * @ORM\OneToOne(targetEntity="Holidays", cascade={"all"})
      * @ORM\JoinColumn(name="holidays_id", referencedColumnName="id")
      */
     protected $holidays;
@@ -190,30 +189,6 @@ class RunTime extends AbstractTime
     public function getTimeZone()
     {
         return $this->timeZone;
-    }
-
-    /**
-     * Gets the value of schedule.
-     *
-     * @return Schedule
-     */
-    public function getSchedule()
-    {
-        return $this->schedule;
-    }
-
-    /**
-     * Sets the value of schedule.
-     *
-     * @param Schedule $schedule the schedule
-     *
-     * @return self
-     */
-    protected function setSchedule(Schedule $schedule)
-    {
-        $this->schedule = $schedule;
-
-        return $this;
     }
 
     /**
@@ -488,6 +463,30 @@ class RunTime extends AbstractTime
     public function setHolidays(Holidays $holidays)
     {
         $this->holidays = $holidays;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of schedule.
+     *
+     * @return string
+     */
+    public function getSchedule()
+    {
+        return $this->schedule;
+    }
+
+    /**
+     * Sets the value of schedule.
+     *
+     * @param string $schedule the schedule
+     *
+     * @return self
+     */
+    public function setSchedule($schedule)
+    {
+        $this->schedule = $schedule;
 
         return $this;
     }

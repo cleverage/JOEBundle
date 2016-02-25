@@ -183,7 +183,7 @@ class Job extends AbstractEntity
     /**
      * @var IncludeFile
      *
-     * @ORM\OneToOne(targetEntity="IncludeFile")
+     * @ORM\OneToOne(targetEntity="IncludeFile", cascade={"all"})
      * @ORM\JoinColumn(name="description_id", referencedColumnName="id")
      */
     protected $description;
@@ -191,14 +191,14 @@ class Job extends AbstractEntity
     /**
      * @var Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="LockUse", mappedBy="job")
+     * @ORM\OneToMany(targetEntity="LockUse", mappedBy="job", cascade={"all"})
      */
     protected $lockUses;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Variable")
+     * @ORM\ManyToMany(targetEntity="Variable", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_ENVIRONMENT_VARIABLES",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="variable_id", referencedColumnName="id", unique=true)}
@@ -209,7 +209,7 @@ class Job extends AbstractEntity
     /**
      * @var Params
      *
-     * @ORM\OneToOne(targetEntity="Params")
+     * @ORM\OneToOne(targetEntity="Params", cascade={"all"})
      * @ORM\JoinColumn(name="params_id", referencedColumnName="id")
      */
     protected $params;
@@ -217,7 +217,7 @@ class Job extends AbstractEntity
     /**
      * @var Script
      *
-     * @ORM\OneToOne(targetEntity="Script")
+     * @ORM\OneToOne(targetEntity="Script", cascade={"all"})
      * @ORM\JoinColumn(name="script_id", referencedColumnName="id")
      */
     protected $script;
@@ -225,7 +225,7 @@ class Job extends AbstractEntity
     /**
      * @var Monitor
      *
-     * @ORM\OneToOne(targetEntity="Monitor")
+     * @ORM\OneToOne(targetEntity="Monitor", cascade={"all"})
      * @ORM\JoinColumn(name="monitor_id", referencedColumnName="id")
      */
     protected $monitor;
@@ -233,7 +233,7 @@ class Job extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="StartWhenDirectoryChanged")
+     * @ORM\ManyToMany(targetEntity="StartWhenDirectoryChanged", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_START_WHEN_DIRECTORY_CHANGED",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="start_when_directory_changed_id", referencedColumnName="id", unique=true)}
@@ -244,7 +244,7 @@ class Job extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="DelayAfterError")
+     * @ORM\ManyToMany(targetEntity="DelayAfterError", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_DELAY_AFTER_ERROR",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="delay_after_error_id", referencedColumnName="id", unique=true)}
@@ -255,7 +255,7 @@ class Job extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="DelayOrderAfterSetBack")
+     * @ORM\ManyToMany(targetEntity="DelayOrderAfterSetBack", cascade={"all"})
      * @ORM\JoinTable(name="ARII_JOB_JOE_DELAY_ORDER_AFTER_SETBACK",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="delay_order_after_setback_id", referencedColumnName="id", unique=true)}
@@ -266,7 +266,7 @@ class Job extends AbstractEntity
     /**
      * @var RunTime
      *
-     * @ORM\OneToOne(targetEntity="RunTime")
+     * @ORM\OneToOne(targetEntity="RunTime", cascade={"all"})
      * @ORM\JoinColumn(name="runtime_id", referencedColumnName="id")
      */
     protected $runtime;
@@ -274,7 +274,7 @@ class Job extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Commands")
+     * @ORM\ManyToMany(targetEntity="Commands", cascade={"all"})
      * @ORM\JoinTable(name="JOE_JOB_COMMANDS",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="commands_id", referencedColumnName="id", unique=true)}
@@ -1003,6 +1003,19 @@ class Job extends AbstractEntity
     {
         $this->delayOrderAfterSetBack = $delayOrderAfterSetBack;
 
+        return $this;
+    }
+
+    /**
+     * Add DelayOrderAfterSetBack in collection
+     *
+     * @param DelayOrderAfterSetBack $delayOrderAfterSetBack
+     *
+     * @return self
+     */
+    public function addDelayOrderAfterSetBack(DelayOrderAfterSetBack $delayOrderAfterSetBack)
+    {
+        $this->delayOrderAfterSetBack[] = $delayOrderAfterSetBack;
         return $this;
     }
 

@@ -38,7 +38,7 @@ class OnReturnCode extends AbstractEntity
     /**
      * @var OnReturnCodeAddOrder
      *
-     * @ORM\OneToOne(targetEntity="OnReturnCodeAddOrder")
+     * @ORM\OneToOne(targetEntity="OnReturnCodeAddOrder", cascade={"all"})
      * @ORM\JoinColumn(name="on_return_code_add_order_id", referencedColumnName="id")
      */
     protected $onReturnCodeAddOrder;
