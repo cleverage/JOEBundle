@@ -32,7 +32,7 @@ class LockUse extends AbstractEntity
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="lock", type="string", length=255)
+     * @ORM\Column(name="lock_use_lock", type="string", length=255, nullable=true)
      */
     protected $lock;
 

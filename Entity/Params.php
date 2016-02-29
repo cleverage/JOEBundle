@@ -64,7 +64,7 @@ class Params extends AbstractEntity
      *
      * @return ArrayCollection
      */
-    public function getParams()
+    public function getParamCollection()
     {
         return $this->paramCollection;
     }
@@ -76,7 +76,7 @@ class Params extends AbstractEntity
      *
      * @return self
      */
-    public function setParams(ArrayCollection $paramCollection)
+    public function setParamCollection(ArrayCollection $paramCollection)
     {
         $this->paramCollection = $paramCollection;
         return $this;

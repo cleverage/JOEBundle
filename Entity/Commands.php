@@ -242,15 +242,15 @@ class Commands extends AbstractEntity
     }
 
     /**
-     * Add Job in addJobsCollection
+     * Add AddJobs in addJobsCollection
      *
-     * @param Job $job
+     * @param AddJobs $job
      *
      * @return self
      */
-    public function addJob(Job $job)
+    public function addAddJobs(AddJobs $addJobs)
     {
-        $this->addJobsCollection[] = $job;
+        $this->addJobsCollection[] = $addJobs;
         return $this;
     }
 

@@ -241,7 +241,7 @@ class StartJob extends At
      *
      * @return ArrayCollection
      */
-    public function getShowStateCollection()
+    public function getEnvironmentVariables()
     {
         return $this->environmentVariables;
     }
@@ -253,7 +253,7 @@ class StartJob extends At
      *
      * @return self
      */
-    public function setShowStateCollection(ArrayCollection $environmentVariables)
+    public function setEnvironmentVariables(ArrayCollection $environmentVariables)
     {
         $this->environmentVariables = $environmentVariables;
         return $this;
@@ -266,7 +266,7 @@ class StartJob extends At
      *
      * @return self
      */
-    public function addShowState(Variable $variable)
+    public function addVariable(Variable $variable)
     {
         $this->environmentVariables[] = $variable;
         return $this;

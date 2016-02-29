@@ -33,36 +33,32 @@ class Script extends AbstractEntity
     /**
      * @var string
      *
-     * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="com_class", type="string", length=255)
+     * @ORM\Column(name="com_class", type="string", length=255, nullable=true)
      */
     protected $comClass;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="filename", type="string", length=255)
+     * @ORM\Column(name="filename", type="string", length=255, nullable=true)
      */
     protected $filename;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="java_class", type="string", length=255)
+     * @ORM\Column(name="java_class", type="string", length=255, nullable=true)
      */
     protected $javaClass;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="java_class_path", type="string", length=255)
+     * @ORM\Column(name="java_class_path", type="string", length=255, nullable=true)
      */
     protected $javaClassPath;
 

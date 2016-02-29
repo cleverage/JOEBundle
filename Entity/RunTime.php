@@ -31,14 +31,14 @@ class RunTime extends AbstractTime
     /**
      * @var string
      *
-     * @ORM\Column(name="time_zone", type="string", length=255)
+     * @ORM\Column(name="time_zone", type="string", length=255, nullable=true)
      */
     protected $timeZone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="schedule", type="string", length=255)
+     * @ORM\Column(name="schedule", type="string", length=255, nullable=true)
      */
     protected $schedule;
 

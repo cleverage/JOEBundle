@@ -25,7 +25,7 @@ class IncludeFile extends AbstractEntity
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="file", type="string", length=255)
+     * @ORM\Column(name="file", type="string", length=255, nullable=true)
      */
     protected $file;
 
@@ -34,7 +34,7 @@ class IncludeFile extends AbstractEntity
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="liveFile", type="string", length=255)
+     * @ORM\Column(name="liveFile", type="string", length=255, nullable=true)
      */
     protected $liveFile;
 
@@ -43,7 +43,7 @@ class IncludeFile extends AbstractEntity
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="node", type="string", length=255)
+     * @ORM\Column(name="node", type="string", length=255, nullable=true)
      */
     protected $node;
 

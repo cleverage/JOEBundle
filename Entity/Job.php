@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Job
  *
- * @ORM\Table(name="JOE_JOB", uniqueConstraints={@ORM\UniqueConstraint(name="name", columns={"job_scheduler_id", "name"})})
+ * @ORM\Table(name="JOE_JOB", uniqueConstraints={@ORM\UniqueConstraint(name="job_name", columns={"job_scheduler_id", "job_name"})})
  * @ORM\Entity
  */
 class Job extends AbstractEntity
@@ -28,9 +28,16 @@ class Job extends AbstractEntity
      * @var Arii\JOEBundle\Entity\JobScheduler
      *
      * @ORM\ManyToOne(targetEntity="JobScheduler")
-     * @ORM\JoinColumn(name="job_scheduler_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="job_scheduler_id", referencedColumnName="id", nullable=false)
      */
     protected $jobScheduler;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $filename;
 
     /**
      * @var boolean
@@ -67,7 +74,7 @@ class Job extends AbstractEntity
      *
      * Note: Change to string if you know the maximum length.
      *
-     * @ORM\Column(name="java_options", type="text")
+     * @ORM\Column(name="java_options", type="text", nullable=true)
      */
     protected $javaOptions;
 
@@ -83,42 +90,42 @@ class Job extends AbstractEntity
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="job_name", type="string", length=255, nullable=true)
      */
     protected $name;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="job_order", type="boolean", nullable=true)
      */
-    protected $order = true;
+    protected $order;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=12)
+     * @ORM\Column(type="string", length=12, nullable=true)
      */
     protected $priority;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="process_class", type="string")
+     * @ORM\Column(name="process_class", type="string", nullable=true)
      */
     protected $processClass;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="job_replace", type="boolean")
      */
     protected $replace = true;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="spooler_id", type="integer")
+     * @ORM\Column(name="spooler_id", type="integer", nullable=true)
      */
     protected $spoolerId;
 
@@ -155,7 +162,7 @@ class Job extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $title;
 
@@ -169,14 +176,14 @@ class Job extends AbstractEntity
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="warn_if_longer_than", type="datetime")
+     * @ORM\Column(name="warn_if_longer_than", type="datetime", nullable=true)
      */
     protected $warnIfLongerThan;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="warn_if_shorter_than", type="datetime")
+     * @ORM\Column(name="warn_if_shorter_than", type="datetime", nullable=true)
      */
     protected $warnIfShorterThan;
 
@@ -255,7 +262,7 @@ class Job extends AbstractEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="DelayOrderAfterSetBack", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="DelayOrderAfterSetback", cascade={"all"})
      * @ORM\JoinTable(name="ARII_JOB_JOE_DELAY_ORDER_AFTER_SETBACK",
      *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="delay_order_after_setback_id", referencedColumnName="id", unique=true)}
@@ -292,7 +299,6 @@ class Job extends AbstractEntity
         $this->delayOrderAfterSetBack    = new ArrayCollection;
         $this->environmentVariable       = new ArrayCollection;
         $this->lockUse                   = new ArrayCollection;
-        $this->params                    = new ArrayCollection;
         $this->startWhenDirectoryChanged = new ArrayCollection;
         $this->commandsCollection        = new ArrayCollection;
         return parent::__construct();
@@ -1079,6 +1085,30 @@ class Job extends AbstractEntity
         Commands $commands
     ) {
         $this->commandsCollection[] = $commands;
+        return $this;
+    }
+
+    /**
+     * Gets the value of filename.
+     *
+     * @return string
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * Sets the value of filename.
+     *
+     * @param string $filename the filename
+     *
+     * @return self
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+
         return $this;
     }
 }

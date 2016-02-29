@@ -56,7 +56,6 @@ class JobChainNode extends AbstractEntity
     /**
      * @var string
      *
-     * @Assert\Choice(choices = {"suspend", "setback"})
      * @ORM\Column(name="on_error", type="string", length=7)
      */
     protected $onError;
@@ -235,40 +234,40 @@ class JobChainNode extends AbstractEntity
     }
 
     /**
-     * Get onReturnCodeCollectionCollection
+     * Get onReturnCodeCollection
      *
      * @return ArrayCollection
      */
-    public function getOnReturnCodeCollectionCollection()
+    public function getOnReturnCodeCollection()
     {
-        return $this->onReturnCodeCollectionCollection;
+        return $this->onReturnCodeCollection;
     }
 
     /**
-     * Set onReturnCodeCollectionCollection
+     * Set onReturnCodeCollection
      *
-     * @param ArrayCollection $onReturnCodeCollectionCollection
+     * @param ArrayCollection $onReturnCodeCollection
      *
      * @return self
      */
-    public function setOnReturnCodeCollectionCollection(
-        ArrayCollection $onReturnCodeCollectionCollection
+    public function setOnReturnCodeCollection(
+        ArrayCollection $onReturnCodeCollection
     ) {
-        $this->onReturnCodeCollectionCollection = $onReturnCodeCollectionCollection;
+        $this->onReturnCodeCollection = $onReturnCodeCollection;
         return $this;
     }
 
     /**
-     * Add OnReturnCodeCollection in onReturnCodeCollectionCollection
+     * Add OnReturnCode in onReturnCodeCollection
      *
-     * @param OnReturnCodeCollection $onReturnCodeCollection
+     * @param OnReturnCode $onReturnCode
      *
      * @return self
      */
-    public function addOnReturnCodeCollection(
-        OnReturnCodeCollection $onReturnCodeCollection
+    public function addOnReturnCode(
+        OnReturnCode $onReturnCode
     ) {
-        $this->onReturnCodeCollectionCollection[] = $onReturnCodeCollection;
+        $this->onReturnCodeCollection[] = $onReturnCode;
         return $this;
     }
 }

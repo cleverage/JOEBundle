@@ -94,11 +94,11 @@ abstract class AbstractEvent extends Event
     /**
      * Set Payload Status
      *
-     * @param PayloadStatus status
+     * @param status
      *
      * @return self
      */
-    public function setStatus(PayloadStatus $status)
+    public function setStatus($status)
     {
         $this->payload->setStatus($status);
         return $this;

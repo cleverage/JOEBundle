@@ -9,6 +9,7 @@
 namespace Arii\JOEBundle\Service;
 
 use Arii\JOEBundle\Entity\Job as Entity;
+use Arii\JOEBundle\Entity\JobScheduler as JobSchedulerEntity;
 use Arii\JOEBundle\Event\Job as Event;
 use Arii\JOEBundle\Event\JobCollection as CollectionEvent;
 use Aura\Payload\PayloadFactory;
@@ -84,13 +85,17 @@ class Job
     }
 
     /**
-     * Return new JobScheduler entity.
+     * Return new Job entity.
+     *
+     * @param  \Arii\JOEBundle\Entity\JobScheduler $jobScheduler
      *
      * @return \Arii\JOEBundle\Entity\Job
      */
-    public function getNew()
+    public function getNew(JobSchedulerEntity $jobScheduler)
     {
-        return new Entity();
+        $entity = new Entity();
+        $entity->setJobScheduler($jobScheduler);
+        return $entity;
     }
 
     /**
@@ -137,11 +142,18 @@ class Job
     }
 
     /**
+     * Get all Job in $jobScheduler.
+     *
+     * @param Arii\JOEBundle\Entity\JobScheduler $jobScheduler (optional)
+     *
      * @return Aura\Payload\Payload
      */
-    public function fetchAll()
+    public function fetchAll(JobSchedulerEntity $jobScheduler)
     {
         $payload = $this->payloadFactory->newInstance();
+        $payload->setInput(array(
+            'jobScheduler' => $jobScheduler,
+        ));
 
         $this->eventDispatcher->dispatch(
             CollectionEvent::ON_FETCH_PRE,
@@ -150,7 +162,8 @@ class Job
 
         $collection = $this->entityManager
             ->getRepository('AriiJOEBundle:Job')
-            ->findAll();
+            ->findByJobScheduler($jobScheduler);
+
 
         if (!$collection) {
             $payload->setStatus(PayloadStatus::NOT_FOUND);

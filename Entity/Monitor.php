@@ -26,7 +26,7 @@ class Monitor extends AbstractEntity
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     protected $name;
 
@@ -35,7 +35,7 @@ class Monitor extends AbstractEntity
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="ordering", type="integer", length=255)
+     * @ORM\Column(name="ordering", type="integer", length=255, nullable=true)
      */
     protected $ordering;
 

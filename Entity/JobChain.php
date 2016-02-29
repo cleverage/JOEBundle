@@ -489,7 +489,7 @@ class JobChain extends AbstractEntity
     public function addJobChainNode(
         JobChainNode $jobChainNode
     ) {
-        $this->jobChainNodeCollection[] = $jobChainNodeCollection;
+        $this->jobChainNodeCollection[] = $jobChainNode;
         return $this;
     }
 
