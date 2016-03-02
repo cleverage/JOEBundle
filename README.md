@@ -1,8 +1,8 @@
 # Ari'i - JOE Bundle
 
-Fonction:  Module de conception 
+Fonction:  Module de conception
 Nécessite: CoreBundle
 
-* [Documentation source file](doc/)
+* [Documentation source file](Resources/doc/)
 
 
