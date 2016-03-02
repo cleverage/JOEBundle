@@ -44,6 +44,14 @@ class Order extends AbstractEntity
     protected $title;
 
     /**
+     * @var string
+     *
+     * @Assert\Length(max=255)
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $name;
+
+    /**
      * @var Params
      *
      * @ORM\OneToOne(targetEntity="Params", cascade={"all"})
@@ -175,6 +183,30 @@ class Order extends AbstractEntity
     public function setRunTime(RunTime $runTime)
     {
         $this->runTime = $runTime;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Sets the value of name.
+     *
+     * @param string $name the name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
         return $this;
     }

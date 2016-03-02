@@ -17,3 +17,19 @@ services:
       - "@doctrine.orm.entity_manager"
       - "@event_dispatcher"
       - "@validator"
+  arii_joe.job_chain:
+    class:          Arii\JOEBundle\Service\JobChain
+    factory_class:  Arii\JOEBundle\Service\Factory\JobChain
+    factory_method: get
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@event_dispatcher"
+      - "@validator"
+  arii_joe.order:
+    class:          Arii\JOEBundle\Service\Order
+    factory_class:  Arii\JOEBundle\Service\Factory\Order
+    factory_method: get
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@event_dispatcher"
+      - "@validator"

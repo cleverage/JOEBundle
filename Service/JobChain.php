@@ -1,6 +1,6 @@
 <?php
 /**
- * Job Service.
+ * JobChain Service.
  *
  * @link   https://github.com/AriiPortal/JOEBundle
  * @author Bryan Folliot <bfolliot@clever-age.com>
@@ -18,20 +18,20 @@ use Ramsey\Uuid\Uuid;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class Job extends AbstractService
+class JobChain extends AbstractService
 {
     public function getEntityName()
     {
-        return \Arii\JOEBundle\Entity\Job::class;
+        return \Arii\JOEBundle\Entity\JobChain::class;
     }
 
     public function getEventName()
     {
-        return \Arii\JOEBundle\Event\Job::class;
+        return \Arii\JOEBundle\Event\JobChain::class;
     }
 
     public function getEventCollectionName()
     {
-        return \Arii\JOEBundle\Event\JobCollection::class;
+        return \Arii\JOEBundle\Event\JobChainCollection::class;
     }
 }
